@@ -2,7 +2,7 @@ import random
 import math
 
 
-def random_board():
+def init_brd():
     board = []
     for x in range(num_q):
         board.append(random.randint(0, num_q-1))
@@ -21,12 +21,12 @@ def cost(state):
 
 
 def simulated_annealing():
-    solution_found = False
-    current = random_board()
+    solution = False
+    current = init_brd()
     hits = cost(current)
     t = init_temp
     # cooling rate
-    sch = 0.99
+    sch = 0.01
 
     while t > 0:
         successor = current.copy()
@@ -39,12 +39,13 @@ def simulated_annealing():
         if delta < 0 or random.uniform(0, 1) < math.exp(-delta / t):
             current = successor.copy()
             hits = cost(current)
-            t *= sch
+            t -= sch
         if hits == 0:
-            solution_found = True
+            solution = True
             print_board(current)
             break
-    if solution_found is False:
+    if solution is False:
+        print_board(current)
         print("Failed")
 
 

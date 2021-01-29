@@ -145,6 +145,7 @@ def A_star(maze, blocked, start, goal):
                 direction.append("right")
             if i == len(path) - 1:
                 direction.append("goal")
+        print("\n")
         for i in path:
             if direction == []:
                 direction.append
@@ -152,7 +153,7 @@ def A_star(maze, blocked, start, goal):
                 print("{} => ".format(i), end="")
             else:
                 print("{} = Goal ".format(i), end="\n\n")
-        print(direction)
+        print(direction, end="\n\n")
         return True
 
 
